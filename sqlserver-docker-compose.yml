@@ -1,0 +1,19 @@
+version: "3.9"
+
+services:
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: mssql2022
+    restart: unless-stopped
+    ports:
+      - "1433:1433"   # Host:Container
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "SuperSecure!123"   # Change this to a strong password
+      MSSQL_PID: "Developer"          # or "Express", "Standard", "Enterprise"
+    volumes:
+      - mssql_data:/var/opt/mssql
+
+volumes:
+  mssql_data:
+    driver: local
